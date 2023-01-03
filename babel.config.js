@@ -1,21 +1,23 @@
 module.exports = {
-  presets: [
-    '@babel/react',
-    [
-      '@babel/env',
-      {
-        targets: [
-          '> 1%',
-          'last 3 versions',
-          'ie >= 9',
-          'ios >= 8',
-          'android >= 4.2',
-        ],
-      },
-    ],
-  ],
-  plugins: [
-    '@babel/plugin-transform-runtime',
-    ['@babel/plugin-proposal-class-properties', { loose: true }],
-  ],
+	presets: [
+		'@babel/react',
+		[
+			'@babel/env',
+			{
+				targets: [
+					'> 1%',
+					'last 3 versions',
+					'ie >= 9',
+					'ios >= 8',
+					'android >= 4.2',
+				],
+			},
+		],
+	],
+	plugins: [
+		'@babel/plugin-transform-runtime',
+		['@babel/plugin-proposal-class-properties', { loose: true }],
+		['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+		['@babel/plugin-proposal-private-methods', { loose: true }],
+	],
 };

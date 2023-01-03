@@ -3,4 +3,6 @@ module.exports = {
   trailingComma: 'all',
   arrowParens: 'always',
   quoteProps: 'consistent',
+  tabWidth: 4,
+  useTabs: true,
 };

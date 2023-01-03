@@ -4,7 +4,7 @@ import morgan from 'morgan';
 import serialize from 'serialize-javascript';
 
 import config from 'server/config';
-import { serverRenderer } from 'renderers/server';
+import serverRenderer from 'renderers/server';
 
 const app = express();
 app.enable('trust proxy');
@@ -19,28 +19,28 @@ app.use(bodyParser.json());
 app.locals.serialize = serialize;
 
 if (config.isDev) {
-  app.locals.gVars = {
-    main: ['main.css', 'main.js'],
-    vendor: 'vendor.js',
-  };
+	app.locals.gVars = {
+		main: ['main.css', 'main.js'],
+		vendor: 'vendor.js',
+	};
 } else {
-  try {
-    app.locals.gVars = require('../../.reactful.json');
-  } catch (err) {
-    console.error('Reactful did not find Webpack generated assets');
-  }
+	try {
+		app.locals.gVars = require('../../.reactful.json');
+	} catch (err) {
+		console.error('Reactful did not find Webpack generated assets');
+	}
 }
 
 app.get('/', async (req, res) => {
-  try {
-    const vars = await serverRenderer();
-    res.render('index', vars);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Server error');
-  }
+	try {
+		const vars = await serverRenderer();
+		res.render('index', vars);
+	} catch (err) {
+		console.error(err);
+		res.status(500).send('Server error');
+	}
 });
 
 app.listen(config.port, config.host, () => {
-  console.info(`Running on ${config.host}:${config.port}...`);
+	console.info(`Running on ${config.host}:${config.port}...`);
 });
